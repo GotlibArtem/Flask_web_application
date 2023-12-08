@@ -18,7 +18,7 @@ python -m venv venv
 ```
 3. Установите зависимости
 ```
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 4. Запустить виртуальное окружение
 ```
