@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="vh-80">
+        <div class="row d-flex justify-content-center align-items-center h-80">
+            <div class="col-lg-10 col-xl-10">
+
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-4 col-xl-5 order-1 order-lg-1">
+
+                    <p class="text-center h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">Регистрация</p>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form action="{{ url_for('user.process_reg') }}" method="POST" class="mx-1 mx-md-4">
+                        {{ form.hidden_tag() }}
+
+                        <!-- Name input -->
+                        <div class="form-outline flex-fill mb-2">
+                            {{ form.username.label }}
+                            {{ form.username() }}
+                        </div>
+                    
+                        <!-- Email input -->
+                        <div class="form-outline flex-fill mb-2">
+                            {{ form.email.label }}
+                            {{ form.email() }}
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            {{ form.password.label }}
+                            {{ form.password() }}
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            {{ form.submit() }}
+                        </div>
+
+                    </form>
+
+                    </div>
+                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                        class="img-fluid" alt="Sample image">
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

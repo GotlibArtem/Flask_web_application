@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="/static/css/other_style.css">
+<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <section class="vh-10">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-80">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <h3 class="mb-4 pb-2 fw-normal">Проверьте прогноз погоды</h3>
+                    <div class="input-group rounded mb-3">
+                        <form class="d-flex search" action="{{ url_for('weather.search_weather') }}" method="POST">
+                            {{ check_weather_form.hidden_tag() }}
+                                {{ check_weather_form.city_name(value=city_name) }}
+                                {{ check_weather_form.check_submit() }}
+                        </form>
+                    </div>
+                    <div class="card shadow-0 border">
+                        <div class="card-body p-4">
+                            <h4 class="mb-1 sfw-normal"> {{ location }} </h4>
+                            <p class="mb-2">Текущая температура: <strong> {{ current_temp }} °C</strong></p>
+                            <p>Ощущается как: <strong> {{ feelslike_temp }} °C</strong></p>
+                            <div class="d-flex flex-row align-items-center">
+                                <p class="mb-0 me-4"> {{ weather_descriptions }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

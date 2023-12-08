@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="/static/css/other_style.css">
+<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+{% extends "base.html" %}
+
+{% block content %}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<div class="alert alert-warning" role="alert">
+				{% for message in messages %}
+					{{ message }}<br>
+				{% endfor %}
+			</div>
+		{% endif %}
+	{% endwith %}
+	<p></p>
+	<div class="card-header-tab">
+		<form class="d-flex search" action="{{ url_for('note.process_search') }}" method="POST">
+			{{ search_note_form.hidden_tag() }}
+				{{ search_note_form.search_note() }}
+				{{ search_note_form.search_submit() }}
+		</form>
+	
+		<nav aria-label="Page navigation" class="navigation_page">
+			<ul class="pagination pagination-sm">
+				<li class="page-item {% if not pagination.has_prev %} disabled {% endif %}">
+					<a class="page-link" href="{{ url_for('note.user_notes', page=pagination.prev_num) }}" aria-label="<<">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+	
+				{% for page in pagination.iter_pages(left_edge=1, left_current=2, right_current=2, right_edge=1) %}
+					{% if page %}
+					<li class="page-item {%if page==pagination.page%} active {%endif%}">
+						<a class="page-link" href="{{ url_for('note.user_notes', page=page) }}">{{page}}</a>
+					</li>
+					{% else %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#">&hellip;</a>
+					</li>
+					{% endif %}
+				{% endfor %}
+	
+				<li class="page-item {% if not pagination.has_next %} disabled {% endif %}">
+					<a class="page-link" href="{{ url_for('note.user_notes', page=pagination.next_num) }}" aria-label=">>">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="row d-flex justify-content-center container">
+		<div class="col">
+			<div class="card-hover-shadow-2x card">
+				<div class="card-header-tab card-header">
+					<a class="btn btn-outline-primary btn-sm btn_id1" href="/notes/add_note" role="button">Создать заметку</a>
+				</div>
+
+				<div class="scroll-area-sm">
+					<perfect-scrollbar class="ps-show-limits">
+						<div style="position: static;" class="ps ps--active-y">
+							<div class="ps-content">
+								<ul class=" list-group list-group-flush">
+									{% for note in pagination.items %}
+										<li class="list-group-item">
+											<div class="widget-content p-0">
+												<div class="widget-content-wrapper">
+													<div class="widget-content-left">
+														<div class="widget-heading">
+															<b>Наименование:</b> {{ note.note_name }} <br> <b>Описание: </b>{{ note.note_body }}
+														</div>
+													</div>
+													<div class="widget-content-right">
+														<a class="border-0 btn-transition btn btn-outline-success change" href="{{ url_for('note.change_note', id_note=note.id_note) }}" role="button">Изменить</a>
+														<form action="{{ url_for('note.delete_note', id_note=note.id_note) }}" method="POST">
+															{{ delete_note_form.hidden_tag() }}
+															{{ delete_note_form.delete_submit() }}
+														</form>
+													</div>
+												</div>
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</perfect-scrollbar>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

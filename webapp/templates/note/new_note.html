@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/static/css/other_style.css">
+<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="registration-form">
+		<form action="{{ url_for('note.process_create_note') }}" method="POST">
+			{{ add_note_form.hidden_tag() }}
+			
+			<p class="h5 text-center">{{ page_title }}</p>
+			<div class="form-group">
+				{{ add_note_form.note_name.label }}
+				{{ add_note_form.note_name() }}
+			</div>
+			<div class="form-group" rows="3">
+				{{ add_note_form.note_body.label }}
+				{{ add_note_form.note_body() }}
+			</div>
+			<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+				{{ add_note_form.submit() }}
+			</div>
+		</form>
+	</div>
+{% endblock %}

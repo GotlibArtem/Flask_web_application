@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+        <div class=" text-center mt-5 ">
+            <h1>Данные пользователя</h1>
+        </div>
+        <div class="row ">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mt-2 mx-auto p-4 bg-light">
+                    <div class="card-body bg-light">
+                        <div class = "container">
+                            <form id="contact-form" role="form">
+                        <div class="controls">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_name">Имя пользователя *</label>
+                                    <input class="form-control" type="text" value="{{ user_data.username }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_lastname">Почта</label>
+                                    <input class="form-control" type="text" value="{{ user_data.email }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="btn btn-success btn-send pt-2 btn-block">
+                                {{ form.submit() }}
+                            </div>
+                        </div>
+                        <!-- Submit -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

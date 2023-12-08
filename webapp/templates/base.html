@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru" >
+	<head>
+		<title> Онлайн заметки - {{ page_title }} </title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<link rel="stylesheet" href="/static/css/main_style.css">
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	</head>
+	<body>
+		<header id="header">
+			<nav class="navbar fixed-top navbar-expand-lg" id="navbar">
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li data-menuanchor="firstPage" class="nav-item">
+							<a class="nav-link" href="/">Главная</a>
+						</li>
+						{% if current_user.is_authenticated %}
+							<li data-menuanchor="secondPage" class="nav-item">
+								<a class="nav-link" href="/notes/">Мои заметки</a>
+							</li>
+						{% else %}
+							<li data-menuanchor="secondPage" class="nav-item">
+								<a class="nav-link" href="/users/login">Мои заметки</a>
+							</li>
+						{% endif %}
+						<li data-menuanchor="thirdPage" class="nav-item">
+							<a class="nav-link" href="/weather/">Погода</a>
+						</li>
+						{% if current_user.is_authenticated %}
+							{% if current_user.is_admin %}
+								<li data-menuanchor="fourthPage" class="nav-item">
+									<a class="nav-link" href="#admin">Админка</a>
+								</li>
+							{% endif %}
+						{% endif %}
+					</ul>
+					<form class="d-flex">
+						{% if current_user.is_authenticated %}
+							<li class="nav-item dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									{{ current_user.username }}
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/users/user_info/{{ current_user.id }}">Данные пользователя</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="/users/logout">Выйти</a></li>
+								</ul>
+							</li>
+						{% else %}
+							<a class="btn btn-outline-dark btn-sm btn_id1" href="/users/login" role="button">Войти</a>
+						{% endif %}
+					</form>
+				</div>
+			</nav>
+		</header>
+		<div>
+			{% block content %}{% endblock %}
+		</div>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/js/bootstrap.bundle.min.js"></script>
+		<script src="/static/js/jquery.min.js"></script>
+	</body>
+</html>
