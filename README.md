@@ -14,7 +14,7 @@ git clone https://github.com/GotlibArtem/flask_web_application.git
 ```
 2. Создайте виртуальное окружение
 ```
-python -m venv venv
+python -m env venv
 ```
 3. Установите зависимости
 ```
