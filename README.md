@@ -13,7 +13,7 @@
 git clone https://github.com/GotlibArtem/flask_web_application.git
 ```
 2. Создайте базу данных PostgreSQL через pgAdmin или иную СУБД
-3. В папке 'webapp' создайте файл config.py и опишите в нем переменные:
+3. В папке 'flask_web_application\webapp' создайте файл 'config.py' и опишите в нем переменные:
 ```
 DB_NAME = 'Наименование вашей базы данных'
 
