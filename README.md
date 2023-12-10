@@ -30,7 +30,7 @@ WEATHER_KEY = '236a15e449e790249595c79f1d5984a8'
 4. Создайте и запустите виртуальное окружение:
 ```
 python -m venv env
-env\scripts\activate.bat
+env\scripts\activate
 ```
 5. Установите зависимости:
 ```
@@ -52,5 +52,5 @@ python create_admin.py
 ## Запуск
 Чтобы запустить веб-приложение, выполните в консоли:
 ```
-run.bat
+run
 ```
