@@ -7,7 +7,7 @@
 
 Для хранения данных используется база данных PostgreSQL.
 
-## Устновка и настройка проекта
+## Установка и настройка проекта
 1. Клонируйте репозиторий:
 ```
 git clone https://github.com/GotlibArtem/flask_web_application.git
